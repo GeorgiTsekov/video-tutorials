@@ -3,10 +3,6 @@ const bcrypt = require('bcrypt');
 const SALT_ROUNDS = 10;
 
 const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-    },
     username: {
         type: String,
         required: true,
@@ -14,7 +10,13 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-    }
+    },
+    enrolledCourses: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'Course',
+        }
+    ]
 });
 
 userSchema.pre('save', function (next) {

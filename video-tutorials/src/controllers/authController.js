@@ -21,7 +21,7 @@ router.post('/login', isGuest, async (req, res) => {
 
         res.redirect('/');
     } catch (error) {
-        res.render('housing/create', { error: error.message })
+        res.render('course/create', { error: error.message })
     }
 });
 
@@ -30,9 +30,9 @@ router.get('/register', isGuest, (req, res) => {
 });
 
 router.post('/register', isGuest, async (req, res) => {
-    const { name, username, password, rePassword } = req.body;
+    const { username, password, repeatPassword } = req.body;
 
-    if (password !== rePassword) {
+    if (password !== repeatPassword) {
         res.locals.error = 'Password missmatch';
 
         return res.render('auth/register');
@@ -40,7 +40,6 @@ router.post('/register', isGuest, async (req, res) => {
 
     try {
         await authService.register({
-            name,
             username,
             password,
         });
@@ -55,7 +54,7 @@ router.post('/register', isGuest, async (req, res) => {
         res.redirect('/');
 
     } catch (error) {
-        res.render('housing/create', { error: error.message })
+        res.render('course/create', { error: error.message })
     }
 });
 

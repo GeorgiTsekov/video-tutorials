@@ -16,12 +16,12 @@ router.get('/create', isAuth, (req, res) => {
 
 router.post('/create', isAuth, async (req, res) => {
     try {
-        let { name, type, year, city, image, description, availablePieces } = req.body;
+        let { title, description, imageUrl, isPublic } = req.body;
 
-        let owner = req.user._id;
-        await courseService.create({ name, type, year, city, image, description, availablePieces, owner });
+        let creator = req.user._id;
+        await courseService.create({ title, description, imageUrl, isPublic, creator });
 
-        res.redirect('/course');
+        res.redirect('/');
     } catch (error) {
         res.render('course/create', { error: error.message })
     }

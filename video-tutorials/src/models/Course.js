@@ -20,7 +20,8 @@ const courseSchema = new mongoose.Schema({
         default: false,
     },
     createAt: {
-        type: String,
+        type: Date, 
+        default: Date.now,
         required: true,
     },
     usersEnrolled: [
@@ -29,7 +30,7 @@ const courseSchema = new mongoose.Schema({
             ref: 'User',
         }
     ],
-    owner: {
+    creator: {
         type: mongoose.Types.ObjectId,
         ref: 'User',
         required: true,
